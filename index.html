@@ -34,6 +34,10 @@
         display: block; 
       }
       
+      a {
+        text-decoration: none;
+      }
+      
       /* sanity in padding */
       *, *:before, *:after {
         -moz-box-sizing: border-box;
@@ -190,7 +194,7 @@
                 console.log($.a.rules.minWordsPerBook);
                 var title = $.f.word();
                 $.d.title = title;
-                $.s.story.innerHTML = $.s.story.innerHTML + '<h1>' + title + '</h1>';
+                $.s.story.innerHTML = $.s.story.innerHTML + '<h1><a href="https://github.com/kentbrew/honu">' + title + '</a></h1>';
                 $.s.story.innerHTML = $.s.story.innerHTML + '<h2>' + $.f.word() + ' ' + $.f.word() + '</h2>';
                 while ($.v.words < $.a.rules.minWordsPerBook) {
                   $.s.story.innerHTML = $.s.story.innerHTML + $.f.chapter();
