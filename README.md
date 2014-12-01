@@ -12,3 +12,5 @@ The language generated here resembles Hawaiian, since it uses the same character
 Profane or obscene language may appear; kindly accept my apologies in advance, and note that any opinions expressed by the generating function are its own, and not that of its author.
 
 Sample output is also in this repo as honu_8675309.txt. I used 8675309 for the default random seed because it's my lucky number.
+
+Please see Chad Mazzola's Beautiful Web Type repository at http://hellohappy.org/beautiful-web-type/ if you're curious about the typesetting. 
