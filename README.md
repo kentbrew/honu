@@ -3,7 +3,9 @@ honu
 
 An entry for National Novel Generation Month 2014
 
-Copy index.html to your local hard drive and drag it into any browser window to see the output. Change the `seed` value to a different number to generate a different novel.
+Visit <a href="http://kentbrew.com/honu">kentbrew.com/honu</a> to read online, or copy `index.html` to your local hard drive and drag it into any browser window. 
+
+Change the `seed` value to a different number to generate a different novel.
 
 The language generated here resembles Hawaiian, since it uses the same character ranges and follows some of the basic rules. 
 
