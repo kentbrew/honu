@@ -1,0 +1,229 @@
+<!doctype html>
+<html>
+  <head>
+    <title></title>
+    <style>
+      
+      /* headlines */
+      @font-face {
+        font-family: 'PT Sans Narrow';
+        font-style: normal;
+        font-weight: 700;
+        src: local('PT Sans Narrow Bold'), local('PTSans-NarrowBold'), url(http://fonts.gstatic.com/s/ptsansnarrow/v6/Q_pTky3Sc3ubRibGToTAYnhM4mdXpoxYNWk7Ev34U70.woff) format('woff');
+      }
+      /* body */
+      @font-face {
+        font-family: 'PT Serif';
+        font-style: normal;
+        font-weight: 400;
+        src: local('PT Serif'), local('PTSerif-Regular'), url(http://fonts.gstatic.com/s/ptserif/v7/sDRi4fY9bOiJUbgq53yZCXYhjbSpvc47ee6xR_80Hnw.woff) format('woff');
+      }
+
+      /* reset */
+      html, body, div, span, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, b, address, cite, code, em, img, strong, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, footer, header, nav, section, summary { 
+        margin: 0; 
+        padding: 0; 
+        border: 0; 
+        font-size: 100%; 
+        font: inherit; 
+        vertical-align: baseline; 
+      }
+      
+      /* shim */
+      article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+        display: block; 
+      }
+      
+      /* sanity in padding */
+      *, *:before, *:after {
+        -moz-box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+      }
+      
+      body {
+        line-height: normal; 
+        font-size: 18px;
+        font-family:"PT Serif", Georgia, serif;
+        text-align: center;
+        color: #333;
+      }
+      
+      div#main {
+        width: 600px;
+        margin: 0 auto 10em;
+      }
+      
+      h1, h2, h3 {
+        font-family: "PT Sans Narrow", Georgia, serif;
+        text-transform: uppercase;
+      }
+      
+      h1 {
+        font-size: 2.5em;
+        margin-top: 5em;
+      }
+
+      h2 {
+        margin-top: .5em;
+        font-size: 2em;
+      }
+    
+      h3 {
+        margin: 5em 0 2em;
+        font-size: 1.5em;
+        margin-top: 5em;
+        text-align: center;
+      }
+      
+      /* chapters */
+      
+      section {
+        margin-top: 1em;
+        text-align: left;
+        position: relative;
+      }
+      
+      section > p {
+        text-indent: 2em;
+        margin: .5em 0;
+      }
+      
+      section > p:first-child {
+        text-indent: 0;
+      }
+      
+      section > p:first-child:first-letter {
+        float: left; 
+        font-size: 4.5em; 
+        line-height: 60px; 
+        padding-top: .1em; 
+        padding-right: .1em; 
+        font-family: "PT Sans Narrow";
+      }
+
+      </style>
+    <meta charset="utf-8">
+  </head>
+  <body>
+    <div id="main">
+      <div id="story"></div>
+    </div>
+    <script>
+      // generate a novel in fake Hawaiian
+      (function (w, d, a) {
+        var $ = w[a.k] = {
+          'w': w,
+          'd': d,
+          'a': a,
+          's': {},
+          'v': {},
+          'f': (function () {
+            return {
+              rnd: function (max, min) {
+                if (!min) { min = 0; }
+                $.v.rnd = ($.v.rnd * 9301 + 49297) % 233280;
+                return Math.floor($.v.rnd / (233280.0) * (max - min)) + min;
+              },
+              word: function () {
+                var n, i, r, word;
+                word = '';
+                n = $.f.rnd($.a.rules.maxLettersPerWord, $.a.rules.minLettersPerWord);
+                k = $.f.rnd(2);
+                var v = $.a.v;
+                for (i = 0; i < n; i = i + 1) {
+                  if (k) {
+                    r = $.f.rnd($.a.c.length);
+                    word = word + $.a.c[r];
+                  } else {
+                    r = $.f.rnd(v.length);
+                    word = word + v[r];
+                    // if (r > 10) {
+                    //  
+                    // }
+                  }
+                  k = 1 - k;
+                }
+                if (!k) {
+                  r = $.f.rnd(5);
+                  word = word + v[r];
+                }
+                $.v.words = $.v.words + 1;
+                return word;
+              },
+              sentence: function (max, min, phrase) {
+                var n, i, word, sentence;
+                sentence = '';
+                n = $.f.rnd(max || $.a.rules.maxWordsPerSentence, min || $.a.rules.minWordsPerSentence);
+                for (i = 0; i < n; i = i + 1) {
+                  word = $.f.word();
+                  if (!sentence) {
+                    sentence = word.substring(0, 1).toUpperCase() + word.substring(1).toLowerCase();
+                  } else {
+                    sentence = sentence + ' ' + word;
+                  }
+                }
+                if (!phrase) {
+                  sentence = sentence + '.  ';
+                }
+                return sentence;
+              },
+              paragraph: function () {
+                var n, i, sentence, paragraph;
+                paragraph = '';
+                n = $.f.rnd($.a.rules.maxSentencesPerParagraph, $.a.rules.minSentencesPerParagraph);
+                for (i = 0; i < n; i = i + 1) {
+                  paragraph = paragraph + $.f.sentence();
+                }
+                return '<p>' + paragraph + '</p>';
+              },
+              chapter: function () {
+                var n, i, paragraph, chapter;
+                chapter = '';
+                n = $.f.rnd($.a.rules.maxParagraphsPerChapter, $.a.rules.minParagraphsPerChapter);
+                for (i = 0; i < n; i = i + 1) {
+                  chapter = chapter + $.f.paragraph();
+                }
+                return '<h3>' + $.f.sentence(7, 2, true) + '</h3>' + '<section>' +  chapter + '</section>';
+              },
+              write: function () {
+                console.log($.a.rules.minWordsPerBook);
+                var title = $.f.word();
+                $.d.title = title;
+                $.s.story.innerHTML = $.s.story.innerHTML + '<h1>' + title + '</h1>';
+                $.s.story.innerHTML = $.s.story.innerHTML + '<h2>' + $.f.word() + ' ' + $.f.word() + '</h2>';
+                while ($.v.words < $.a.rules.minWordsPerBook) {
+                  $.s.story.innerHTML = $.s.story.innerHTML + $.f.chapter();
+                }
+              },
+              init: function () {
+                $.d.b = $.d.getElementsByTagName('BODY')[0];
+                $.v.rnd = $.a.seed;
+                $.v.words = 0;
+                $.s.story = $.d.getElementById('story');
+                $.f.write();
+              }
+            };
+          }())
+        };
+        $.f.init();
+      }(window, document, {
+        'k': 'HONU',
+        'seed': 8675309,
+        'rules': {
+          'minWordsPerBook': 50000,
+          'minLettersPerWord': 3,
+          'maxLettersPerWord': 5,
+          'minWordsPerSentence': 3,
+          'maxWordsPerSentence': 19,
+          'minSentencesPerParagraph': 3,
+          'maxSentencesPerParagraph': 23,
+          'minParagraphsPerChapter': 29,
+          'maxParagraphsPerChapter': 51
+        },
+        'c': ["'", "h", "k", "l", "m", "n", "p", "w"],
+        'v': ["a", "e", "i", "o", "u", "ā", "ē", "ī", "ō", "ū", "ai", "ae", "ao", "au", "ei", "eu", "iu", "oe", "oi", "ou", "ui" ]
+      }));
+    </script>
+  </body>
+</html>
